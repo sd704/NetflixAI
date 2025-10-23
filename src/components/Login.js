@@ -1,22 +1,28 @@
 import { useRef, useState } from "react"
 import Header from "./Header"
 import { validateEmail, validatePass } from "../utils/validate"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { auth } from "../utils/firebase"
 
 const Login = () => {
     const [isSignInForm, setSignInForm] = useState(true)
     const [isEmailValid, setEmailValidity] = useState(true)
     const [isPasswordValid, setPasswordValidity] = useState(true)
     const [isNameValid, setNameValidity] = useState(true)
+    const [signingError, setError] = useState(null)
+
     const email = useRef(null)
     const pass = useRef(null)
     const name = useRef(null)
 
     const toggleSignUpForm = () => {
+        // Clear form data
         email.current.value = null
         pass.current.value = null
         setEmailValidity(true)
         setPasswordValidity(true)
         setNameValidity(true)
+        setError(null)
         setSignInForm(!isSignInForm)
     }
 
@@ -26,6 +32,34 @@ const Login = () => {
         setPasswordValidity(validatePass(pass.current.value))
         if (!isSignInForm) {
             setNameValidity(name.current.value.trim().length > 0)
+        }
+
+        //Submit if valid
+        if (!isSignInForm && isEmailValid && isPasswordValid && isNameValid) {
+            createUserWithEmailAndPassword(auth, email.current.value, pass.current.value)
+                .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user
+                    console.log(user)
+                })
+                .catch((error) => {
+                    const errorCode = error.code
+                    const errorMessage = error.message
+                    setError(errorCode + " - " + errorMessage)
+                });
+        }
+        if (isSignInForm && isEmailValid && isPasswordValid) {
+            signInWithEmailAndPassword(auth, email.current.value, pass.current.value)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    console.log(user)
+                })
+                .catch((error) => {
+                    const errorCode = error.code
+                    const errorMessage = error.message
+                    setError(errorCode + " - " + errorMessage)
+                });
         }
     }
 
@@ -38,6 +72,7 @@ const Login = () => {
                 <Header />
                 <form className="w-3/12 mx-auto my-48 rounded-lg p-16 text-white bg-black/80" onSubmit={(e) => e.preventDefault()}>
                     <p className="font-bold text-4xl my-8">{isSignInForm ? "Sign In" : "Sign Up"}</p>
+                    {signingError !== null && <p className="text-red-600 text-sm mb-2">{signingError}</p>}
                     {!isSignInForm && <input ref={name} type="text" placeholder="Username" className="p-4 my-4 w-full rounded-lg bg-gray-800/30 border border-gray-800" />}
                     {!isSignInForm && !isNameValid && <p className="text-red-600 text-sm mb-2">⨂ Please enter a username.</p>}
                     <input ref={email} type="text" placeholder="Email" className={`p-4 my-4 w-full rounded-lg bg-gray-800/30 border ${!isEmailValid ? 'border-red-600' : 'border-gray-800'}`} />
