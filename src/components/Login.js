@@ -3,8 +3,14 @@ import Header from "./Header"
 import { validateEmail, validatePass } from "../utils/validate"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../utils/firebase"
+import { useNavigate } from "react-router-dom"
+
 
 const Login = () => {
+    // Navigate Hook to navigate to path
+    // Navigate can be used where RouterProvider is in parent component
+    const navigate = useNavigate()
+
     const [isSignInForm, setSignInForm] = useState(true)
     const [isEmailValid, setEmailValidity] = useState(true)
     const [isPasswordValid, setPasswordValidity] = useState(true)
@@ -16,6 +22,7 @@ const Login = () => {
     const name = useRef(null)
 
     const toggleSignUpForm = () => {
+        // Function to toggle between Sign In state and Sign Up state
         // Clear form data
         email.current.value = null
         pass.current.value = null
@@ -36,6 +43,7 @@ const Login = () => {
 
         //Submit if valid
         if (!isSignInForm && isEmailValid && isPasswordValid && isNameValid) {
+            // Sign Up
             createUserWithEmailAndPassword(auth, email.current.value, pass.current.value)
                 .then((userCredential) => {
                     // Signed up 
@@ -47,8 +55,10 @@ const Login = () => {
                     const errorMessage = error.message
                     setError(errorCode + " - " + errorMessage)
                 });
+            navigate("/browse")
         }
         if (isSignInForm && isEmailValid && isPasswordValid) {
+            // Sign In
             signInWithEmailAndPassword(auth, email.current.value, pass.current.value)
                 .then((userCredential) => {
                     // Signed in 
@@ -60,6 +70,7 @@ const Login = () => {
                     const errorMessage = error.message
                     setError(errorCode + " - " + errorMessage)
                 });
+            navigate("/browse")
         }
     }
 
@@ -72,16 +83,30 @@ const Login = () => {
                 <Header />
                 <form className="w-3/12 mx-auto my-48 rounded-lg p-16 text-white bg-black/80" onSubmit={(e) => e.preventDefault()}>
                     <p className="font-bold text-4xl my-8">{isSignInForm ? "Sign In" : "Sign Up"}</p>
+
+                    {/* Show Sign In Error if any */}
                     {signingError !== null && <p className="text-red-600 text-sm mb-2">{signingError}</p>}
+
+                    {/* Show Username Input Box if its Sign Up form */}
                     {!isSignInForm && <input ref={name} type="text" placeholder="Username" className="p-4 my-4 w-full rounded-lg bg-gray-800/30 border border-gray-800" />}
+
+                    {/* Show error if Username field empty */}
                     {!isSignInForm && !isNameValid && <p className="text-red-600 text-sm mb-2">⨂ Please enter a username.</p>}
+
                     <input ref={email} type="text" placeholder="Email" className={`p-4 my-4 w-full rounded-lg bg-gray-800/30 border ${!isEmailValid ? 'border-red-600' : 'border-gray-800'}`} />
-                    {!isEmailValid && <p className="text-red-600 text-sm mb-2">⨂ Please enter a valid email or mobile number.</p>}
+
+                    {/* Email Error */}
+                    {!isEmailValid && <p className="text-red-600 text-sm mb-2">⨂ Please enter a valid email.</p>}
+
                     <input ref={pass} type="password" placeholder="Password" className={`p-4 my-4 w-full rounded-lg bg-gray-800/30 border ${!isPasswordValid ? 'border-red-600' : 'border-gray-800'}`} />
+
+                    {/* Password Error */}
                     {!isPasswordValid && <p className="text-red-600 text-sm mb-2">⨂ Your password must be 8-60 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character.</p>}
+
                     <button className="p-2 my-4 w-full rounded-lg bg-red-600 font-bold" onClick={handleFormSubmission}>
                         {isSignInForm ? "Sign In" : "Sign Up"}
                     </button>
+
                     <p className="my-4 cursor-pointer" onClick={toggleSignUpForm}>
                         {isSignInForm ? "New to Netflix? " : "Already registered? "}
                         <span className="font-bold text-red-600">
