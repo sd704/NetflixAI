@@ -27,8 +27,8 @@ const Body = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 // Save User info received from firebase
-                const { uid, email, displayName } = user
-                dispatch(addUser({ uid: uid, email: email, displayName: displayName }))
+                const { uid, email, displayName, photoURL } = user
+                dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }))
             } else {
                 // Clear User 
                 dispatch(removeUser())
