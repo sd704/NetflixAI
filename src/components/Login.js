@@ -1,15 +1,18 @@
 import { useRef, useState } from "react"
 import Header from "./Header"
 import { validateEmail, validatePass } from "../utils/validate"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../utils/firebase"
 import { useNavigate } from "react-router-dom"
-
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
     // Navigate Hook to navigate to path
     // Navigate can be used where RouterProvider is in parent component
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
 
     const [isSignInForm, setSignInForm] = useState(true)
     const [isEmailValid, setEmailValidity] = useState(true)
@@ -49,13 +52,26 @@ const Login = () => {
                     // Signed up 
                     const user = userCredential.user
                     console.log(user)
+
+                    // Add Name
+                    updateProfile(auth.currentUser, {
+                        displayName: name.current.value,
+                        photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt0RN1rfgQ3wvx01TOc_5dyRGoW8SRGWTtmg&s"
+                    }).then(() => {
+                        // Profile updated!
+                        const { uid, email, displayName, photoURL } = auth.currentUser
+                        dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }))
+                        // Navigate to /browse if login success
+                        navigate("/browse")
+                    }).catch((error) => {
+                        setError(error)
+                    });
                 })
                 .catch((error) => {
                     const errorCode = error.code
                     const errorMessage = error.message
                     setError(errorCode + " - " + errorMessage)
                 });
-            navigate("/browse")
         }
         if (isSignInForm && isEmailValid && isPasswordValid) {
             // Sign In
@@ -64,13 +80,14 @@ const Login = () => {
                     // Signed in 
                     const user = userCredential.user;
                     console.log(user)
+                    // Navigate to /browse if login success
+                    navigate("/browse")
                 })
                 .catch((error) => {
                     const errorCode = error.code
                     const errorMessage = error.message
                     setError(errorCode + " - " + errorMessage)
                 });
-            navigate("/browse")
         }
     }
 
