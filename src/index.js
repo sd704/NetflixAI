@@ -10,6 +10,8 @@ root.render(
     <App />
   </React.StrictMode>
 );
+// StrictMode causes APIs to load twice (only in local, won't happen in production)
+// React does this to check inconsistencies between calls
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
