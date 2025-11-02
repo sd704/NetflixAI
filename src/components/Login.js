@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPasswo
 import { auth } from "../utils/firebase"
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { DP, BACKDROP } from "../utils/constants"
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -45,18 +46,16 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed up 
                     // const user = userCredential.user
-                    // console.log(user)
 
                     // Add Name
                     updateProfile(auth.currentUser, {
                         displayName: name.current.value,
-                        photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt0RN1rfgQ3wvx01TOc_5dyRGoW8SRGWTtmg&s"
+                        photoURL: DP
                     }).then(() => {
                         // Profile updated!
                         const { uid, email, displayName, photoURL } = auth.currentUser
                         dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }))
                         // Navigate to /browse if login success
-                        // navigate("/browse")
                     }).catch((error) => {
                         setError(error)
                     });
@@ -73,9 +72,7 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     // const user = userCredential.user;
-                    // console.log(user)
                     // Navigate to /browse if login success
-                    // navigate("/browse")
                 })
                 .catch((error) => {
                     const errorCode = error.code
@@ -86,10 +83,7 @@ const Login = () => {
     }
 
     return (
-        <div className="w-screen h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/024bfb98-9e9d-441d-9c5f-d2c798d8e42f/web/IN-en-20251013-TRIFECTA-perspective_b6324826-0535-47c5-be5f-4f50e9663eaf_large.jpg')] bg-center bg-cover">
-            {/* <img src="https://assets.nflxext.com/ffe/siteui/vlv3/024bfb98-9e9d-441d-9c5f-d2c798d8e42f/web/IN-en-20251013-TRIFECTA-perspective_b6324826-0535-47c5-be5f-4f50e9663eaf_large.jpg"
-                srcset="https://assets.nflxext.com/ffe/siteui/vlv3/024bfb98-9e9d-441d-9c5f-d2c798d8e42f/web/IN-en-20251013-TRIFECTA-perspective_b6324826-0535-47c5-be5f-4f50e9663eaf_large.jpg 2000w, https://assets.nflxext.com/ffe/siteui/vlv3/024bfb98-9e9d-441d-9c5f-d2c798d8e42f/web/IN-en-20251013-TRIFECTA-perspective_b6324826-0535-47c5-be5f-4f50e9663eaf_medium.jpg 1279w, https://assets.nflxext.com/ffe/siteui/vlv3/024bfb98-9e9d-441d-9c5f-d2c798d8e42f/web/IN-en-20251013-TRIFECTA-perspective_b6324826-0535-47c5-be5f-4f50e9663eaf_small.jpg 959w"
-                alt="" aria-hidden="true" /> */}
+        <div style={{ backgroundImage: `url(${BACKDROP})` }} className="w-screen h-screen bg-center bg-cover">
             <div className="w-full h-full bg-black/40">
                 <Header />
                 <form className="w-3/12 mx-auto my-48 rounded-lg p-16 text-white bg-black/80" onSubmit={(e) => e.preventDefault()}>
