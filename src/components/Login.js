@@ -3,17 +3,11 @@ import Header from "./Header"
 import { validateEmail, validatePass } from "../utils/validate"
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../utils/firebase"
-import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 
 const Login = () => {
-    // Navigate Hook to navigate to path
-    // Navigate can be used where RouterProvider is in parent component
-    const navigate = useNavigate()
     const dispatch = useDispatch()
-
-
     const [isSignInForm, setSignInForm] = useState(true)
     const [isEmailValid, setEmailValidity] = useState(true)
     const [isPasswordValid, setPasswordValidity] = useState(true)
@@ -50,8 +44,8 @@ const Login = () => {
             createUserWithEmailAndPassword(auth, email.current.value, pass.current.value)
                 .then((userCredential) => {
                     // Signed up 
-                    const user = userCredential.user
-                    console.log(user)
+                    // const user = userCredential.user
+                    // console.log(user)
 
                     // Add Name
                     updateProfile(auth.currentUser, {
@@ -62,7 +56,7 @@ const Login = () => {
                         const { uid, email, displayName, photoURL } = auth.currentUser
                         dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }))
                         // Navigate to /browse if login success
-                        navigate("/browse")
+                        // navigate("/browse")
                     }).catch((error) => {
                         setError(error)
                     });
@@ -78,10 +72,10 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value, pass.current.value)
                 .then((userCredential) => {
                     // Signed in 
-                    const user = userCredential.user;
-                    console.log(user)
+                    // const user = userCredential.user;
+                    // console.log(user)
                     // Navigate to /browse if login success
-                    navigate("/browse")
+                    // navigate("/browse")
                 })
                 .catch((error) => {
                     const errorCode = error.code
