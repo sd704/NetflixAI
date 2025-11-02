@@ -1,40 +1,20 @@
-import { useEffect } from "react"
 import Browse from "./Browse"
 import Login from "./Login"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import { useDispatch } from "react-redux";
-import { addUser, removeUser } from "../utils/userSlice";
+import ProtectedRoute from "./ProtectedRoute"
 
 const Body = () => {
-    // Dispatch Hook to call reducer functions
-    const dispatch = useDispatch()
 
     const appRouter = createBrowserRouter([
         {
             path: "/",
-            element: <Login />,
+            element: <ProtectedRoute><Login /></ProtectedRoute>,
         },
         {
             path: "/browse",
-            element: <Browse />,
+            element: <ProtectedRoute><Browse /></ProtectedRoute>,
         }
     ])
-
-    // Handling User Sign In and Sign Out
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // Save User info received from firebase
-                const { uid, email, displayName, photoURL } = user
-                dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }))
-            } else {
-                // Clear User 
-                dispatch(removeUser())
-            }
-        });
-    }, [dispatch])
 
     return (
         <div>
