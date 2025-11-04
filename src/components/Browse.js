@@ -1,17 +1,17 @@
 import Header from "./Header"
-import { BACKDROP } from "../utils/constants"
+import Trailer from "./Trailer"
+import CardLayout from "./CardLayout"
 import useFetchMovies from "../hooks/useFetchMovies"
 
 const Browse = () => {
     useFetchMovies()
-
+   
     return (
-        <div style={{ backgroundImage: `url(${BACKDROP})` }} className="w-screen h-screen bg-center bg-cover">
-            <div className="w-full h-full bg-black/40">
-                <Header />
-            </div>
-        </div>
-
+        <div className="bg-black">
+            <Header />
+            <Trailer />
+            <CardLayout />
+        </div >
     )
 }
 

@@ -4,6 +4,12 @@ export const BACKDROP = 'https://assets.nflxext.com/ffe/siteui/vlv3/024bfb98-9e9
 
 export const DP = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt0RN1rfgQ3wvx01TOc_5dyRGoW8SRGWTtmg&s"
 
+export const TMDB_NOW_PLAYING_MOVIE = "https://api.themoviedb.org/3/movie/now_playing?page=1"
+
+export const TMDB_VIDEO_URL = (id) => `https://api.themoviedb.org/3/movie/${id}/videos`
+
+export const YOUTUBE_EMBEDDED_URL = (key) => `https://www.youtube.com/embed/${key}?&amp;controls=0&modestbranding=1&disablekb=1&fs=0&rel=0&iv_load_policy=3&autoplay=1&mute=1&loop=1&playlist=${key}`
+
 export const API_OPTIONS = {
     method: 'GET',
     headers: {

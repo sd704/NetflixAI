@@ -84,9 +84,9 @@ const Login = () => {
 
     return (
         <div style={{ backgroundImage: `url(${BACKDROP})` }} className="w-screen h-screen bg-center bg-cover">
-            <div className="w-full h-full bg-black/40">
+            <div className="w-full h-full bg-black/40 pt-80">
                 <Header />
-                <form className="w-3/12 mx-auto my-48 rounded-lg p-16 text-white bg-black/80" onSubmit={(e) => e.preventDefault()}>
+                <form className="w-3/12 mx-auto rounded-lg p-16 text-white bg-black/80" onSubmit={(e) => e.preventDefault()}>
                     <p className="font-bold text-4xl my-8">{isSignInForm ? "Sign In" : "Sign Up"}</p>
 
                     {/* Show Sign In Error if any */}
