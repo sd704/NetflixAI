@@ -20,7 +20,7 @@ const Header = () => {
         <div className="px-8 py-8 bg-gradient-to-b from-black w-full flex justify-between fixed top-0 z-20">
             <img src={LOGO} className="w-44" alt="" />
             {user && <div className="flex p-4 items-center">
-                <img src={user?.photoURL} className="w-10 h-10 rounded-md cursor-pointer" alt="User Icon" />
+                <img src={user?.photoURL} className="w-10 h-10 rounded-md cursor-pointer" alt="Profile" />
                 <p className="font-bold text-red-600 ml-4 cursor-pointer" onClick={handleSignOut}>Sign Out</p>
             </div>}
         </div>
