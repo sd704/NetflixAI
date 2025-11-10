@@ -12,7 +12,9 @@ export const TMDB_SERIES_LIST_TYPES = ["Airing Today", "Popular", "Top Rated"]
 
 export const TMDB_SERIES_URL = (seriesType) => `https://api.themoviedb.org/3/tv/${seriesType.toLowerCase().replace(' ', '_')}?page=1`
 
-export const TMDB_VIDEO_URL = (id) => `https://api.themoviedb.org/3/movie/${id}/videos`
+export const TMDB_MOVIE_VIDEO_URL = (id) => `https://api.themoviedb.org/3/movie/${id}/videos`
+
+export const TMDB_SERIES_VIDEO_URL = (id) => `https://api.themoviedb.org/3/tv/${id}/videos`
 
 export const TMDB_IMAGE_URL = (path) => `https://image.tmdb.org/t/p/w500${path}`
 
