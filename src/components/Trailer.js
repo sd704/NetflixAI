@@ -3,7 +3,7 @@ import useFetchTrailer from "../hooks/useFetchTrailer"
 import { YOUTUBE_EMBEDDED_URL } from "../utils/constants"
 
 const Trailer = () => {
-    const movies = useSelector(store => store.movie?.nowPlayingMovies)
+    const movies = useSelector(store => store.movie?.movieLists?.[0])
     useFetchTrailer(movies?.[0]?.id)
     const trailerKey = useSelector(store => store.movie?.trailerKey)
     // Don't render if movie doesn't exist, "Early Return"
