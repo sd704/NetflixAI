@@ -3,24 +3,22 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { addMovieLists, addSeriesLists } from "../utils/movieSlice"
 
-const useFetchMovies = () => {
+const useFetchMoviesSeries = () => {
     const dispatch = useDispatch()
 
-    const getMovieLists = async (type) => {
-        const rawData = await fetch(TMDB_MOVIE_URL(type), API_OPTIONS)
-        const data = await rawData.json()
-        console.log(data)
-        dispatch(addMovieLists(data.results))
-    }
-
-    const getSeriesLists = async (type) => {
-        const rawData = await fetch(TMDB_SERIES_URL(type), API_OPTIONS)
-        const data = await rawData.json()
-        console.log(data)
-        dispatch(addSeriesLists(data.results))
-    }
-
     useEffect(() => {
+        const getMovieLists = async (type) => {
+            const rawData = await fetch(TMDB_MOVIE_URL(type), API_OPTIONS)
+            const data = await rawData.json()
+            dispatch(addMovieLists(data.results))
+        }
+
+        const getSeriesLists = async (type) => {
+            const rawData = await fetch(TMDB_SERIES_URL(type), API_OPTIONS)
+            const data = await rawData.json()
+            dispatch(addSeriesLists(data.results))
+        }
+
         TMDB_MOVIE_LIST_TYPES.forEach((movieListType) => {
             getMovieLists(movieListType)
         })
@@ -30,4 +28,4 @@ const useFetchMovies = () => {
     }, [dispatch])
 }
 
-export default useFetchMovies
+export default useFetchMoviesSeries

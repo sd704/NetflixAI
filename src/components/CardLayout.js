@@ -1,9 +1,14 @@
 import { TMDB_IMAGE_URL } from "../utils/constants"
+import { useDispatch } from "react-redux"
+import { addTrailerData, addTrailerType } from "../utils/movieSlice"
 
-const CardLayout = ({ heading, listData, type, setTrailerMovie }) => {
+const CardLayout = ({ heading, listData, type }) => {
+    const dispatch = useDispatch()
 
     const switchTrailer = (item) => {
-        setTrailerMovie([item, type])
+        dispatch(addTrailerData(item))
+        dispatch(addTrailerType(type))
+        window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
     return (
