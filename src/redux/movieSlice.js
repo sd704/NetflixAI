@@ -5,7 +5,7 @@ const movieSlice = createSlice({
     initialState: {
         trailerData: null,
         trailerType: null,
-        trailerKey: null,
+        trailerKey: {},
         movieLists: [],
         seriesLists: []
     },
@@ -23,7 +23,8 @@ const movieSlice = createSlice({
             state.trailerType = action.payload
         },
         addTrailerKey: (state, action) => {
-            state.trailerKey = action.payload
+            const { id, key } = action.payload
+            state.trailerKey[id] = key
         }
     }
 })

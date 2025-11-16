@@ -1,6 +1,6 @@
 import { TMDB_IMAGE_URL } from "../utils/constants"
 import { useDispatch } from "react-redux"
-import { addTrailerData, addTrailerType } from "../utils/movieSlice"
+import { addTrailerData, addTrailerType } from "../redux/movieSlice"
 
 const CardLayout = ({ heading, listData, type }) => {
     const dispatch = useDispatch()

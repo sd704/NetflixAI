@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { auth } from "../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { addUser, removeUser } from "../utils/userSlice";
+import { addUser, removeUser } from "../redux/userSlice";
 import { useEffect } from "react"
 
 const ProtectedRoute = ({ children }) => {

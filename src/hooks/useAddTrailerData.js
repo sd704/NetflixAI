@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { addTrailerData, addTrailerType } from "../utils/movieSlice"
+import { addTrailerData, addTrailerType } from "../redux/movieSlice"
 
 const useAddTrailerData = () => {
     const dispatch = useDispatch()

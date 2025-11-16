@@ -4,7 +4,7 @@ import { validateEmail, validatePass } from "../utils/validate"
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../utils/firebase"
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../redux/userSlice";
 import { DP, BACKDROP } from "../utils/constants"
 
 const Login = () => {
@@ -108,7 +108,7 @@ const Login = () => {
                     {/* Password Error */}
                     {!isPasswordValid && <p className="text-red-600 text-sm mb-2">⨂ Your password must be 8-60 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character.</p>}
 
-                    <button className="p-2 my-4 w-full rounded-lg bg-red-600 font-bold" onClick={handleFormSubmission}>
+                    <button className="p-2 my-4 w-full rounded-lg bg-red-600 active:bg-red-800 font-bold" onClick={handleFormSubmission}>
                         {isSignInForm ? "Sign In" : "Sign Up"}
                     </button>
 
