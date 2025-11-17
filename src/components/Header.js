@@ -36,7 +36,7 @@ const Header = () => {
                 {gptPageState && <select className="text-white bg-gray-900 border-2 border-gray-700 mr-6 py-2 px-4 cursor-pointer rounded-lg focus:outline-none" onClick={handleSetLanguage}>
                     {SUPPORTED_LANGUAGES.map(language => <option key={language} value={language} className="text-black bg-white">{language}</option>)}
                 </select>}
-                {!gptPageState && <button className="font-bold text-white mr-6 py-2 px-4 cursor-pointer gradient-border" onClick={toggleGptPage}>✦ GPT Search</button>}
+                {!gptPageState && <button className="font-bold text-white mr-6 py-2 px-4 cursor-pointer gradient-border bg-gray-900 active:bg-gray-700" onClick={toggleGptPage}>✦ GPT Search</button>}
                 {gptPageState && <button className="font-bold text-white mr-6 py-2 px-4 cursor-pointer bg-red-600 active:bg-red-800 rounded-lg" onClick={toggleGptPage}>Home</button>}
                 <img src={user?.photoURL} className="w-10 h-10 rounded-md cursor-pointer" alt="Profile" />
                 <p className="group font-bold text-white ml-4 cursor-pointer" onClick={handleSignOut}>

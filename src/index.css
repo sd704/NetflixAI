@@ -17,27 +17,54 @@
 }
 
 .gradient-border {
-    --borderWidth: 1px;
-    background: #000000;
     position: relative;
     border-radius: 0.5rem;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .01);
+
+    &::after {
+        position: absolute;
+        content: "";
+        top: 8px;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        transform: scale(0.9) translateZ(0);
+        filter: blur(15px);
+        background: linear-gradient(to left,
+                #ff5770,
+                #e4428d,
+                #c42da8,
+                #9e16c3,
+                #6501de,
+                #9e16c3,
+                #c42da8,
+                #e4428d,
+                #ff5770);
+        background-size: 200% 200%;
+        animation: animateGlow 1.50s linear infinite;
+    }
 }
 
-.gradient-border:after {
-    content: '';
-    position: absolute;
-    top: calc(-1 * var(--borderWidth));
-    left: calc(-1 * var(--borderWidth));
-    height: calc(100% + var(--borderWidth) * 2);
-    width: calc(100% + var(--borderWidth) * 2);
-    background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
-    border-radius: 0.5rem;
-    z-index: -1;
-    animation: animatedgradient 3s ease alternate infinite;
-    background-size: 300% 300%;
+@keyframes animateGlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
 }
 
-@keyframes animatedgradient {
+
+.shimmer-background {
+    background: linear-gradient(122deg, #000, #dc2626, #000);
+    background-size: 180% 180%;
+    animation: gradient-animation 3s ease infinite;
+}
+
+@keyframes gradient-animation {
     0% {
         background-position: 0% 50%;
     }
