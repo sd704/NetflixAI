@@ -33,14 +33,17 @@ const Login = () => {
 
     const handleFormSubmission = () => {
         // Validate form data
-        setEmailValidity(validateEmail(email.current.value))
-        setPasswordValidity(validatePass(pass.current.value))
+        const emailValid = validateEmail(email.current.value)
+        const passwordValid = validatePass(pass.current.value)
+        let nameValid = !isSignInForm && name.current.value.trim().length > 0
+        setEmailValidity(emailValid)
+        setPasswordValidity(passwordValid)
         if (!isSignInForm) {
-            setNameValidity(name.current.value.trim().length > 0)
+            setNameValidity(nameValid)
         }
 
         //Submit if valid
-        if (!isSignInForm && isEmailValid && isPasswordValid && isNameValid) {
+        if (!isSignInForm && emailValid && passwordValid && nameValid) {
             // Sign Up
             createUserWithEmailAndPassword(auth, email.current.value, pass.current.value)
                 .then((userCredential) => {
@@ -66,7 +69,7 @@ const Login = () => {
                     setError(errorCode + " - " + errorMessage)
                 });
         }
-        if (isSignInForm && isEmailValid && isPasswordValid) {
+        if (isSignInForm && emailValid && passwordValid) {
             // Sign In
             signInWithEmailAndPassword(auth, email.current.value, pass.current.value)
                 .then((userCredential) => {

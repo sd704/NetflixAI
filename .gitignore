@@ -25,6 +25,6 @@ yarn-error.log*
 
 # Firebase Stuff
 apphosting.yaml
-/.firebase
+/.firebase/hosting.YnVpbGQ.cache
 
 

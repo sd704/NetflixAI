@@ -5,6 +5,7 @@ import { setSelectedItem } from "../redux/gptSlice";
 const GptResultsGrid = () => {
     const dispatch = useDispatch()
     const isLoading = useSelector(store => store.gpt?.isLoading)
+    const noResult = useSelector(store => store.gpt?.noResult)
     const gptResults = useSelector(store => store.gpt?.gptResults)
     const filteredResults = gptResults.filter(item => item?.poster_path)
 
@@ -27,7 +28,7 @@ const GptResultsGrid = () => {
                     className="flex-shrink-0 h-80 my-8 mx-6 aspect-[2/3] shimmer-background rounded-lg cursor-pointer transition-all">
                 </div>))}
             </div>
-            {!isLoading && !filteredResults.length && <p className="font-bold text-3xl text-white">No match found.</p>}
+            {noResult && <p className="font-bold text-3xl text-white">No match found.</p>}
         </div >
     )
 }

@@ -7,7 +7,8 @@ const gptSlice = createSlice({
         gptPage: false,
         gptResults: [],
         selectedItem: {},
-        isLoading: false
+        isLoading: false,
+        noResult: false
     },
     reducers: {
         toggleGptPageState: (state) => {
@@ -25,8 +26,11 @@ const gptSlice = createSlice({
         toggleLoading: (state) => {
             state.isLoading = !state.isLoading
         },
+        toggleNoResult: (state, action) => {
+            state.noResult = action.payload
+        },
     }
 })
 
-export const { toggleGptPageState, setLanguage, addGptResults, setSelectedItem, toggleLoading } = gptSlice.actions
+export const { toggleGptPageState, setLanguage, addGptResults, setSelectedItem, toggleLoading, toggleNoResult } = gptSlice.actions
 export default gptSlice.reducer

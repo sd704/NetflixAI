@@ -1,7 +1,7 @@
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { setLanguage, toggleGptPageState } from "../redux/gptSlice";
+import { setLanguage, toggleGptPageState, toggleNoResult } from "../redux/gptSlice";
 import { LOGO } from "../utils/constants"
 import { SUPPORTED_LANGUAGES } from "../utils/constantsLanguage";
 
@@ -17,6 +17,7 @@ const Header = () => {
 
     const toggleGptPage = () => {
         dispatch(toggleGptPageState())
+        dispatch(toggleNoResult(false))
     }
 
     const handleSignOut = () => {
