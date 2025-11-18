@@ -11,13 +11,13 @@ const Trailer = () => {
     const { id, title, name, overview } = trailerData
 
     return (
-        <div className="relative w-full aspect-video overflow-hidden">
+        <div className="relative w-full aspect-[4/3] md:aspect-[16/10] xl:aspect-video overflow-hidden">
             {/* TRAILER TEXT */}
-            <div className="absolute text-white z-10 w-full h-full pt-[30%] pl-12 bg-gradient-to-t from-black">
-                <div className="font-bold text-6xl">{title ? title : name}</div>
-                <div className="text-xl w-1/3 my-10">{overview}</div>
-                <button className="bg-white text-black text-xl rounded-sm px-8 py-2 hover:bg-opacity-70">⯈ Play</button>
-                <button className="bg-gray-500 bg-opacity-50 text-white text-xl rounded-sm px-8 py-2 mx-2">🛈 More Info</button>
+            <div className="absolute text-white z-10 w-full h-full pt-[30%] px-5 md:px-12 bg-gradient-to-t from-black">
+                <div className="font-bold text-2xl md:text-4xl xl:text-6xl">{title ? title : name}</div>
+                <div className="text-xs md:text-base xl:text-xl xl:w-1/2 my-3 xl:my-10">{overview.slice(0, 250)+"..."}</div>
+                <button className="bg-white text-black text-xs md:text-base xl:text-xl rounded-sm px-8 py-2 hover:bg-opacity-70">⯈ Play</button>
+                <button className="bg-gray-500 bg-opacity-50 text-white text-xs md:text-base xl:text-xl rounded-sm px-8 py-2 mx-2">🛈 More Info</button>
             </div>
             {/* TRAILER VIDEO */}
             {id in trailerKey ? <iframe

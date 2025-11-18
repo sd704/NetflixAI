@@ -35,7 +35,7 @@ const Login = () => {
         // Validate form data
         const emailValid = validateEmail(email.current.value)
         const passwordValid = validatePass(pass.current.value)
-        let nameValid = !isSignInForm && name.current.value.trim().length > 0
+        const nameValid = !isSignInForm && name.current.value.trim().length > 0
         setEmailValidity(emailValid)
         setPasswordValidity(passwordValid)
         if (!isSignInForm) {
@@ -87,10 +87,10 @@ const Login = () => {
 
     return (
         <div style={{ backgroundImage: `url(${BACKDROP})` }} className="w-screen h-screen bg-center bg-cover">
-            <div className="w-full h-full bg-black/40 pt-80">
+            <div className="w-full h-full bg-black/40 md:pt-64 lg:pt-80">
                 <Header />
-                <form className="w-3/12 mx-auto rounded-lg p-16 text-white bg-black/80" onSubmit={(e) => e.preventDefault()}>
-                    <p className="font-bold text-4xl my-8">{isSignInForm ? "Sign In" : "Sign Up"}</p>
+                <form className="w-11/12 md:w-6/12 lg:w-3/12 mx-auto rounded-lg p-5 md:p-8 lg:p-16 mt-32 md:mt-0 text-white bg-black/80 text-sm md:text-base" onSubmit={(e) => e.preventDefault()}>
+                    <p className="font-bold text-2xl md:text-4xl my-8">{isSignInForm ? "Sign In" : "Sign Up"}</p>
 
                     {/* Show Sign In Error if any */}
                     {signingError !== null && <p className="text-red-600 text-sm mb-2">{signingError}</p>}
