@@ -87,10 +87,12 @@ const Login = () => {
 
     return (
         <div style={{ backgroundImage: `url(${BACKDROP})` }} className="w-screen h-screen bg-center bg-cover">
-            <div className="w-full h-full bg-black/40 md:pt-64 lg:pt-80">
+            {/* md:pt-64 lg:pt-80 */}
+            <div className="w-full h-full bg-black/40 flex items-center justify-center">
                 <Header />
-                <form className="w-11/12 md:w-6/12 lg:w-3/12 mx-auto rounded-lg p-5 md:p-8 lg:p-16 mt-32 md:mt-0 text-white bg-black/80 text-sm md:text-base" onSubmit={(e) => e.preventDefault()}>
-                    <p className="font-bold text-2xl md:text-4xl my-8">{isSignInForm ? "Sign In" : "Sign Up"}</p>
+                {/* mt-32 md:mt-0 */}
+                <form className="w-11/12 md:w-6/12 lg:w-6/12 xl:w-3/12 mx-auto rounded-lg p-5 lg:p-8 2xl:p-16  text-white bg-black/80 text-sm md:text-base xl:text-sm 2xl:text-base" onSubmit={(e) => e.preventDefault()}>
+                    <p className="font-bold text-2xl md:text-4xl xl:text-2xl 2xl:text-4xl my-8">{isSignInForm ? "Sign In" : "Sign Up"}</p>
 
                     {/* Show Sign In Error if any */}
                     {signingError !== null && <p className="text-red-600 text-sm mb-2">{signingError}</p>}

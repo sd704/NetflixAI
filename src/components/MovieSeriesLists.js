@@ -8,7 +8,7 @@ const MovieSeriesLists = () => {
     const seriesList = useSelector(store => store.movie?.seriesLists)
 
     return (
-        <div className="relative 2xl:-top-60 3xl:-top-96 z-20 w-full pl-5 md:pl-12">
+        <div className="relative top-14 md:-top-8 lg:-top-24 2xl:-top-60 3xl:-top-96 z-20 w-full pl-5 md:pl-12 bg-black">
             {/* Shimmer UI */}
             {movieList?.length <= 0 && TMDB_MOVIE_LIST_TYPES.map((movieListType) =>
                 <CardLayoutShimmer key={movieListType + "abc"} heading={movieListType + " Movies"} />

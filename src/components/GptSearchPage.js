@@ -40,10 +40,10 @@ const GptSearchPage = () => {
                 <div className="w-full h-full bg-black/40">
                 </div>
             </div>
-            <div className={`relative z-10 mt-20 ${selectedItem?.overview ? 'md:mt-40' : 'md:mt-80'}`}>
-                <form className="w-11/12 md:w-10/12 lg:w-5/12 mx-auto p-5 rounded-xl bg-black/80 flex flex-col md:flex-row text-sm md:text-lg" onSubmit={(e) => e.preventDefault()}>
-                    <input ref={message} type="text" placeholder={langData[language].gptPlaceholder} className="w-full box-border md:w-9/12 lg:w-10/12 p-2 md:p-4 rounded-lg focus:outline-none placeholder-slate-500 placeholder:text-center md:placeholder:text-left" />
-                    <button className="font-bold text-white w-6/12 md:w-3/12 lg:w-2/12 mx-auto mt-2 md:mr-0 md:ml-5 md:my-0 p-2 md:p-4 cursor-pointer bg-red-600 active:bg-red-800 rounded-lg" onClick={handleGPTSearch}>{langData[language].searchButton + " ✦"}</button>
+            <div className={`relative z-10 mt-48 ${selectedItem?.overview ? 'md:mt-40 xl:mt-40 2xl:mt-40' : 'md:mt-80 xl:mt-48 2xl:mt-80'}`}>
+                <form className="w-11/12 md:w-10/12 xl:w-6/12 2xl:w-5/12 mx-auto p-5 rounded-xl bg-black/80 flex flex-col md:flex-row text-sm md:text-lg xl:text-sm 2xl:text-lg" onSubmit={(e) => e.preventDefault()}>
+                    <input ref={message} id="searchQuery" type="text" placeholder={langData[language].gptPlaceholder} className="w-full box-border md:w-9/12 lg:w-10/12 xl:w-9/12 2xl:w-10/12 p-2 md:p-4 rounded-lg focus:outline-none placeholder-slate-500 placeholder:text-center md:placeholder:text-left" />
+                    <button className="font-bold text-white w-6/12 md:w-3/12 lg:w-2/12 xl:w-3/12 2xl:w-2/12 mx-auto mt-2 md:mr-0 md:ml-5 md:my-0 p-2 md:p-4 cursor-pointer bg-red-600 active:bg-red-800 rounded-lg" onClick={handleGPTSearch}>{langData[language].searchButton + " ✦"}</button>
                 </form>
                 <SelectedMovie />
                 <GptResultsGrid />
