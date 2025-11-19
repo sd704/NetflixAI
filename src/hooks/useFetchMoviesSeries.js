@@ -11,33 +11,36 @@ const useFetchMoviesSeries = () => {
     useEffect(() => {
         if (movieList.length && seriesList.length) return
 
-        const getMovieLists = async (type) => {
-            try {
-                const rawData = await fetch(TMDB_MOVIE_URL(type), API_OPTIONS)
-                const data = await rawData.json()
-                dispatch(addMovieLists(data.results))
-            } catch (error) {
-                console.error('Error fetching movie lists:', error);
+        const getMovieLists = async () => {
+
+            for (const movieListType of TMDB_MOVIE_LIST_TYPES) {
+                try {
+                    const rawData = await fetch(TMDB_MOVIE_URL(movieListType), API_OPTIONS);
+                    const data = await rawData.json();
+                    dispatch(addMovieLists(data.results));
+                } catch (error) {
+                    console.error('Error fetching movie lists:', error);
+                }
             }
         }
 
-        const getSeriesLists = async (type) => {
-            try {
-                const rawData = await fetch(TMDB_SERIES_URL(type), API_OPTIONS)
-                const data = await rawData.json()
-                dispatch(addSeriesLists(data.results))
-            } catch (error) {
-                console.error('Error fetching movie lists:', error);
+        getMovieLists()
+
+        const getSeriesLists = async () => {
+
+            for (const seriesListType of TMDB_SERIES_LIST_TYPES) {
+                try {
+                    const rawData = await fetch(TMDB_SERIES_URL(seriesListType), API_OPTIONS);
+                    const data = await rawData.json();
+                    dispatch(addSeriesLists(data.results));
+                } catch (error) {
+                    console.error('Error fetching movie lists:', error);
+                }
             }
         }
 
-        TMDB_MOVIE_LIST_TYPES.forEach((movieListType) => {
-            getMovieLists(movieListType)
-        })
-        TMDB_SERIES_LIST_TYPES.forEach((seriesListType) => {
-            getSeriesLists(seriesListType)
-        })
-    }, [movieList, seriesList, dispatch])
+        getSeriesLists()
+    }, [])
 }
 
 export default useFetchMoviesSeries

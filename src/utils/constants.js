@@ -34,7 +34,7 @@ export const API_OPTIONS = {
     }
 };
 
-export const GPT_QUERY = ". Check if query is related to movies or tv shows.  I need the results strictly in raw json format, list of objects with movie/show name, type (movie/show) and release year. Else return a empty array."
+export const GPT_QUERY = ". Check if query is related to movies or tv shows, recommend the movies or shows that best describe the query. I need minimum 10 results unless the query just describes a single movie/show or unrelated text. I need results strictly in raw json format, list of objects with movie/show name, type (movie/show) and release year. Else return a empty array."
 
 
 // LOGO
