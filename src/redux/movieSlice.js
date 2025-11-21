@@ -6,6 +6,7 @@ const movieSlice = createSlice({
         trailerData: null,
         trailerType: null,
         trailerKey: {},
+        showInfo: false,
         movieLists: [],
         seriesLists: []
     },
@@ -25,9 +26,12 @@ const movieSlice = createSlice({
         addTrailerKey: (state, action) => {
             const { id, key } = action.payload
             state.trailerKey[id] = key
-        }
+        },
+        toggleShowInfo: (state) => {
+            state.showInfo = !state.showInfo
+        },
     }
 })
 
-export const { addMovieLists, addSeriesLists, addTrailerData, addTrailerType, addTrailerKey } = movieSlice.actions
+export const { addMovieLists, addSeriesLists, addTrailerData, addTrailerType, addTrailerKey, toggleShowInfo } = movieSlice.actions
 export default movieSlice.reducer

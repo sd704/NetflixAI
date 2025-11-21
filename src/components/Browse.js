@@ -6,10 +6,11 @@ import useFetchMoviesSeries from "../hooks/useFetchMoviesSeries"
 import useFetchTrailer from "../hooks/useFetchTrailer"
 import useAddTrailerData from "../hooks/useAddTrailerData"
 import { useSelector } from "react-redux";
-
+import MoreInfo from "./MoreInfo"
 
 const Browse = () => {
     const gptPageState = useSelector(store => store.gpt?.gptPage)
+    const showInfo = useSelector(store => store.movie?.showInfo)
 
     useFetchMoviesSeries()
     useAddTrailerData()
@@ -25,6 +26,7 @@ const Browse = () => {
                     <MovieSeriesLists />
                 </>
             }
+            {showInfo && <MoreInfo />}
         </div>
     )
 }

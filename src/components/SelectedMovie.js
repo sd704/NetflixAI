@@ -1,8 +1,6 @@
 import { TMDB_IMAGE_URL } from "../utils/constants";
-import { useSelector } from "react-redux";
 
-const SelectedMovie = () => {
-    const selectedItem = useSelector(store => store.gpt?.selectedItem)
+const SelectedMovie = ({selectedItem}) => {
     const { name, title, release_date, first_air_date, overview, poster_path } = selectedItem
 
     if (!overview) return
